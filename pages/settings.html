@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configure application settings.">
+    <title>Settings - Student Finance Tracker</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <span class="brand-icon"></span>
+                <span class="brand-text">FinanceTracker</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html"><span class="icon"></span><span class="label">Dashboard</span></a></li>
+                <li><a href="records.html"><span class="icon"></span><span class="label">Records</span></a></li>
+                <li><a href="add.html"><span class="icon"></span><span class="label">Add New</span></a></li>
+                <li><a href="settings.html" class="active" aria-current="page"><span class="icon"></span><span
+                            class="label">Settings</span></a></li>
+                <li><a href="about.html"><span class="icon"></span><span class="label">About</span></a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+            <header class="top-header">
+                <h1>Settings</h1>
+            </header>
+
+            <section id="settings" class="view-section active">
+                <div class="card settings-card">
+                    <h3>Preferences</h3>
+                    <div class="setting-item">
+                        <label for="currency">Currency</label>
+                        <select id="currency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="theme-toggle">Dark Mode</label>
+                        <input type="checkbox" id="theme-toggle" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label for="budget-cap">Monthly Budget Cap</label>
+                        <input type="number" id="budget-cap" value="1500">
+                    </div>
+                </div>
+
+                <div class="card settings-card danger-zone" style="margin-top: 2rem;">
+                    <h3>Data Management</h3>
+                    <div class="setting-actions">
+                        <button class="btn btn-outline">Export JSON</button>
+                        <label class="btn btn-outline file-upload" style="display:inline-block; margin-left: 10px;">
+                            Import JSON
+                            <input type="file" hidden>
+                        </label>
+                        <button class="btn btn-danger" style="margin-left: 10px;">Clear All Data</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
