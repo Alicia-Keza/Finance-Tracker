@@ -326,6 +326,79 @@ select:focus {
     border-bottom: 1px solid var(--border-color);
 }
 
+.error-message {
+    color: var(--accent-danger);
+    background: rgba(255, 23, 68, 0.1);
+    border: 1px solid var(--accent-danger);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    display: none;
+    /* Hidden by default */
+    white-space: pre-line;
+    /* Perform line breaks for \n */
+}
+
+/* Notification Toast */
+.notification-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.notification-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification-toast.success {
+    border-left-color: var(--accent-success);
+}
+
+.notification-toast.error {
+    border-left-color: var(--accent-danger);
+}
+
+.notification-toast.info {
+    border-left-color: var(--primary-color);
+}
+
+/* Field Validation Errors */
+.field-error {
+    color: var(--accent-danger);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: none;
+    font-weight: 500;
+}
+
+.field-error.show {
+    display: block;
+}
+
+input.invalid,
+select.invalid {
+    border-color: var(--accent-danger);
+}
+
+input.valid,
+select.valid {
+    border-color: var(--accent-success);
+}
+
 /* Mobile Component Adaptations */
 /* Mobile Component Adaptations */
 @media (max-width: 1024px) {
