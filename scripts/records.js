@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!descriptionRegex.test(newDesc)) {
             isValid = false;
-            errorMessage += "Invalid Description.\n";
+            errorMessage += "Description cannot be numbers only.\n";
         }
         if (!amountRegex.test(newAmount)) {
             isValid = false;

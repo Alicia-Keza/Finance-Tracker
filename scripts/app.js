@@ -4,7 +4,7 @@
  */
 
 // Regex Validation Constants
-const descriptionRegex = /^[A-Za-z0-9 .,!?-]+$/;
+const descriptionRegex = /^(?!\d+$)[A-Za-z0-9 .,!?-]+$/;
 const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
 const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
 

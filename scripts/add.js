@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryInput = document.getElementById('category');
     const dateInput = document.getElementById('date');
 
-    const descMsg = "Invalid Description (alphanumeric and basic punctuation only).";
+    const descMsg = "Description cannot be numbers only (alphanumeric and basic punctuation).";
     const amountMsg = "Invalid Amount (must be greater than 0).";
     const categoryMsg = "Invalid Category format.";
     const dateMsg = "Date is required.";
