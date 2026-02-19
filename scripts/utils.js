@@ -67,10 +67,10 @@ export function showNotification(message, type = 'info') {
         toast.style.transform = 'translateY(0)';
     });
 
-    // Remove after 3s
+    // Remove after 5s
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateY(20px)';
         setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    }, 5000);
 }

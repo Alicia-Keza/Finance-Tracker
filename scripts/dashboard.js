@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Main function to update all dashboard statistics
  * @param {Array} records 
  */
+
 function updateDashboardStats(records) {
     const totalRecords = calculateTotalRecords(records);
     const totalAmount = calculateTotalAmount(records);
@@ -18,9 +19,48 @@ function updateDashboardStats(records) {
     const trendData = calculateLast7DaysTrend(records);
 
     // Render Stats
-    document.getElementById('total-records-display').textContent = totalRecords;
-    document.getElementById('total-amount-display').textContent = formatCurrency(totalAmount);
-    document.getElementById('top-category-display').textContent = topCategory;
+    const totalRecordsDisplay = document.getElementById('total-records-display');
+    const totalAmountDisplay = document.getElementById('total-amount-display');
+    const topCategoryDisplay = document.getElementById('top-category-display');
+
+    totalRecordsDisplay.textContent = totalRecords;
+    totalAmountDisplay.textContent = formatCurrency(totalAmount);
+    topCategoryDisplay.textContent = topCategory;
+
+    // --- Budget Cap Logic (M5) ---
+    const settings = loadSettings();
+    const budgetCap = settings.budgetCap || 0;
+
+    // Calculate Total Expenses for Cap comparison
+    const totalExpenses = records
+        .filter(r => r.type !== 'income') // Expenses
+        .reduce((sum, r) => sum + r.amount, 0);
+
+    const balanceCard = document.querySelector('.summary-card.balance');
+
+    if (budgetCap > 0 && totalExpenses > budgetCap) {
+        // Visual Warning
+        totalAmountDisplay.style.color = 'var(--color-danger, #ff4d4d)';
+        balanceCard.style.borderColor = 'var(--color-danger, #ff4d4d)';
+
+        // Append warning if not already there
+        if (!document.getElementById('budget-warning')) {
+            const warning = document.createElement('small');
+            warning.id = 'budget-warning';
+            warning.style.color = 'var(--color-danger, #ff4d4d)';
+            warning.style.display = 'block';
+            warning.style.fontSize = '0.8rem';
+            warning.textContent = `(Over Budget: ${formatCurrency(budgetCap)})`;
+            totalAmountDisplay.parentNode.appendChild(warning);
+        }
+    } else {
+        // Reset
+        totalAmountDisplay.style.color = '';
+        balanceCard.style.borderColor = '';
+        const warning = document.getElementById('budget-warning');
+        if (warning) warning.remove();
+    }
+
 
     // Render Chart
     renderTrendChart(trendData);
@@ -28,6 +68,7 @@ function updateDashboardStats(records) {
     // Render Recent Activity
     renderRecentActivity(records);
 }
+
 
 /**
  * Calculate Total Records
@@ -95,9 +136,7 @@ function calculateLast7DaysTrend(records) {
         d.setDate(today.getDate() - i);
         const dateString = d.toISOString().split('T')[0];
 
-        // Filter records for this day and sum expenses
-        // Note: The requirement says "total spendings", so typically just expenses.
-        // But "amount" usually implies net. Let's stick to "Spendings" (Expenses).
+       // Filter records for this day and sum expenses
         const daySpendings = records
             .filter(r => r.date === dateString && r.type !== 'income')
             .reduce((sum, r) => sum + r.amount, 0);

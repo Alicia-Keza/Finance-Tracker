@@ -1,8 +1,3 @@
-/**
- * Finance Tracker App Logic
- * Handles LocalStorage and Record Management
- */
-
 // Regex Validation Constants
 const descriptionRegex = /^(?!\d+$)[A-Za-z0-9 .,!?-]+$/;
 const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
@@ -14,9 +9,9 @@ const SETTINGS_KEY = 'financeSettings';
 
 // Default Settings
 const DEFAULT_SETTINGS = {
-    theme: 'dark', // 'dark' or 'light'
+    theme: 'dark', 
     currency: 'USD',
-    budgetCap: 1500
+    budgetCap: 5000
 };
 
 // Currency Rates (Approximate, Base USD)
@@ -25,8 +20,8 @@ const CURRENCIES = {
     'EUR': { symbol: '€', code: 'EUR', rate: 0.92 },
     'GBP': { symbol: '£', code: 'GBP', rate: 0.79 },
     'RWF': { symbol: 'FRW', code: 'RWF', rate: 1350 },
-    'CAD': { symbol: 'C$', code: 'CAD', rate: 1.35 },
-    'JPY': { symbol: '¥', code: 'JPY', rate: 150 }
+
+
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -157,11 +152,11 @@ function showNotification(message, type = 'info') {
         notification.classList.add('show');
     });
 
-    // Remove after 3 seconds
+    // Remove after 5 seconds
     setTimeout(() => {
         notification.classList.remove('show');
         notification.addEventListener('transitionend', () => {
             notification.remove();
         });
-    }, 3000);
+    }, 5000);
 }

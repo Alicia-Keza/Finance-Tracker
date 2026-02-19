@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validator Tests - Student Finance Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .test-group {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-group h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .test-case {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Regex Validation Tests</h1>
+    <div id="results"></div>
+
+    <script type="module">
+        import { descriptionRegex, amountRegex, categoryRegex, currencyRegex, duplicateWordRegex } from './scripts/validators.js';
+
+        const resultsDiv = document.getElementById('results');
+
+        function createGroup(title) {
+            const group = document.createElement('div');
+            group.className = 'test-group';
+            group.innerHTML = `<h2>${title}</h2>`;
+            resultsDiv.appendChild(group);
+            return group;
+        }
+
+        function assert(group, condition, description, value = "") {
+            const div = document.createElement('div');
+            const statusText = condition ? 'PASS' : 'FAIL';
+            div.className = `test-case ${condition ? 'pass' : 'fail'}`;
+            div.innerHTML = `
+                <span>${description} <code style="background:rgba(0,0,0,0.05);padding:2px;border-radius:3px;">"${value}"</code></span>
+                <span class="status">${statusText}</span>
+            `;
+            group.appendChild(div);
+        }
+
+        // --- Description Tests ---
+        // Regex: /^\S(?:.*\S)?$/ (Non-empty, trimmed)
+        const descGroup = createGroup('Description Validator');
+        assert(descGroup, descriptionRegex.test("Valid Description"), "Standard text should pass", "Valid Description");
+        assert(descGroup, descriptionRegex.test("A"), "Single character should pass", "A");
+        assert(descGroup, !descriptionRegex.test(" "), "Whitespace only should fail", " ");
+        assert(descGroup, !descriptionRegex.test("  Start"), "Leading space should fail", "  Start");
+        assert(descGroup, !descriptionRegex.test("End  "), "Trailing space should fail", "End  ");
+
+        // --- Amount Tests ---
+        // Regex: /^(0|[1-9]\d*)(\.\d{1,2})?$/
+        const amountGroup = createGroup('Amount Validator');
+        assert(amountGroup, amountRegex.test("100"), "Integer should pass", "100");
+        assert(amountGroup, amountRegex.test("0"), "Zero should pass", "0");
+        assert(amountGroup, amountRegex.test("10.50"), "Two decimals should pass", "10.50");
+        assert(amountGroup, amountRegex.test("10.5"), "One decimal should pass", "10.5");
+        assert(amountGroup, !amountRegex.test("01"), "Leading zero (non-decimal) should fail", "01");
+        assert(amountGroup, !amountRegex.test("10.555"), "Three decimals should fail", "10.555");
+        assert(amountGroup, !amountRegex.test("-50"), "Negative should fail", "-50");
+        assert(amountGroup, !amountRegex.test("abc"), "Letters should fail", "abc");
+
+        // --- Category Tests ---
+        // Regex: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/
+        const catGroup = createGroup('Category Validator');
+        assert(catGroup, categoryRegex.test("Food"), "Single word alphabet should pass", "Food");
+        assert(catGroup, categoryRegex.test("Food Drink"), "Words with space should pass", "Food Drink");
+        assert(catGroup, categoryRegex.test("Self-Care"), "Words with hyphen should pass", "Self-Care");
+        assert(catGroup, !categoryRegex.test("Food123"), "Numbers should fail", "Food123");
+        assert(catGroup, !categoryRegex.test(" Food"), "Leading space should fail", " Food");
+        assert(catGroup, !categoryRegex.test("Food "), "Trailing space should fail", "Food ");
+
+        // --- Duplicate Word Tests ---
+        // Regex: /\b(\w+)\s+\1\b/i
+        const dupGroup = createGroup('Duplicate Word Validator (Advanced)');
+        // Note: verify if test() returns true for duplicates or valid strings.
+        // Usually, validation regex returns TRUE if VALID. 
+        // But duplicateWordRegex usually MATCHES the error.
+        // So `duplicateWordRegex.test("hello hello")` should be true (meaning duplicate found).
+        // If we want "isValid", it should be !test().
+        // For the purpose of testing the REGEX itself, we assert it MATCHES duplicates.
+        assert(dupGroup, duplicateWordRegex.test("hello hello"), "Should find duplicate 'hello'", "hello hello");
+        assert(dupGroup, duplicateWordRegex.test("Test TEST"), "Should be case-insensitive", "Test TEST");
+        assert(dupGroup, !duplicateWordRegex.test("Hello World"), "Should not find duplicates in unique words", "Hello World");
+
+    </script>
+</body>
+
+</html>

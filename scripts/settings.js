@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     budgetCapInput.addEventListener('change', handleBudgetChange);
 
     // Export
-    // Make sure we select the right button if classes are generic
-    // Using contains check or adding clearer ID in HTML would be better, but let's try to match by text content if needed or just assume order
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(btn => {
         if (btn.textContent.trim() === 'Export JSON') {
@@ -91,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Invalid format: Root must be an array.');
                 }
 
-                // Merge strategies:
-                // 1. Concat (might duplicate if IDs match)
-                // 2. Filter duplicates based on ID
-
+              // Merge strategies:
                 const currentRecords = loadRecords();
                 const currentIds = new Set(currentRecords.map(r => r.id));
 

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     };
 
-    // Attach listeners
+    // Input elements
     const descInput = document.getElementById('desc');
     const amountInput = document.getElementById('amount');
     const categoryInput = document.getElementById('category');

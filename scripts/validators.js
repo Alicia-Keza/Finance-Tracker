@@ -1,7 +1,4 @@
-/**
- * Validators Module
- * Centralizes regex patterns and validation logic.
- */
+// Validators Module
 
 // User-defined Regex
 export const descriptionRegex = /^\S(?:.*\S)?$/; // Non-empty, trimmed
@@ -10,12 +7,6 @@ export const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
 export const currencyRegex = /^\S(?:.*\S)?$/; // Added as requested, though usage TBD
 
 // Advanced Regex for Duplicate Words (kept features as requested previously, or should I remove?)
-// The user prompt only specified the 4 regexes above. 
-// "remember to use rejex validation using the regex.test function andn use the following regexes..."
-// I will keep duplicateWordRegex as a bonus or distinct check if it doesn't conflict, 
-// but the user might be strictly defining the rules. 
-// However, add.js imports `duplicateWordRegex` so I MUST export it or update add.js.
-// I'll keep it for now to avoid breaking add.js import, but maybe make it lenient or standard.
 export const duplicateWordRegex = /\b(\w+)\s+\1\b/i;
 
 export const validateField = (input, regex, errorMsg, errorId) => {
