@@ -42,85 +42,30 @@
             <section id="dashboard" class="view-section active">
                 <div class="summary-cards">
                     <div class="card summary-card balance">
-                        <h3>Current Balance</h3>
-                        <p class="amount">$1,250.00</p>
-                        <span class="trend positive">+5% vs last month</span>
+                        <h3>Total Balance</h3>
+                        <p class="amount" id="total-amount-display">$0.00</p>
                     </div>
-                    <div class="card summary-card income">
-                        <h3>Income (Sept)</h3>
-                        <p class="amount">$2,000.00</p>
+                    <div class="card summary-card total-records">
+                        <h3>Total Records</h3>
+                        <p class="amount" id="total-records-display">0</p>
                     </div>
-                    <div class="card summary-card expense">
-                        <h3>Expenses (Sept)</h3>
-                        <p class="amount">$750.00</p>
+                    <div class="card summary-card top-category">
+                        <h3>Top Category</h3>
+                        <p class="amount" id="top-category-display">-</p>
                     </div>
                 </div>
 
                 <div class="charts-container">
                     <div class="card chart-card">
-                        <h3>Spending by Category</h3>
-                        <div class="chart-container-simple">
-                            <!-- Simple Bar Chart -->
-                            <div class="chart-bar-row">
-                                <div class="chart-label">
-                                    <span>Food</span>
-                                    <span>40%</span>
-                                </div>
-                                <div class="chart-bar-track">
-                                    <div class="chart-bar-fill food" style="width: 40%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="chart-bar-row">
-                                <div class="chart-label">
-                                    <span>Books</span>
-                                    <span>30%</span>
-                                </div>
-                                <div class="chart-bar-track">
-                                    <div class="chart-bar-fill books" style="width: 30%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="chart-bar-row">
-                                <div class="chart-label">
-                                    <span>Transport</span>
-                                    <span>20%</span>
-                                </div>
-                                <div class="chart-bar-track">
-                                    <div class="chart-bar-fill transport" style="width: 20%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="chart-bar-row">
-                                <div class="chart-label">
-                                    <span>Other</span>
-                                    <span>10%</span>
-                                </div>
-                                <div class="chart-bar-track">
-                                    <div class="chart-bar-fill other" style="width: 10%;"></div>
-                                </div>
-                            </div>
+                        <h3>Last 7 Days Spending</h3>
+                        <div id="trend-chart-container">
+                            <!-- Chart rendered by dashboard.js -->
                         </div>
                     </div>
                     <div class="card recent-activity">
                         <h3>Recent Activity</h3>
                         <ul class="activity-list">
-                            <li class="activity-item">
-                                <div class="icon-box food"></div>
-                                <div class="details">
-                                    <span class="title">Lunch at cafeteria</span>
-                                    <span class="date">Today, 12:30 PM</span>
-                                </div>
-                                <span class="amount negative">-$12.50</span>
-                            </li>
-                            <li class="activity-item">
-                                <div class="icon-box transport"></div>
-                                <div class="details">
-                                    <span class="title">Bus Pass</span>
-                                    <span class="date">Yesterday</span>
-                                </div>
-                                <span class="amount negative">-$45.00</span>
-                            </li>
+                            <!-- Dynamic Content -->
                         </ul>
                     </div>
                 </div>
