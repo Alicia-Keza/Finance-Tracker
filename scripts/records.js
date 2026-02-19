@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Date" class="editable date-cell">${record.date}</td>
                 <td data-label="Description" class="editable desc-cell">${record.description}</td>
                 <td data-label="Category" class="editable cat-cell"><span class="badge ${record.category.toLowerCase()}">${record.category}</span></td>
-                <td data-label="Amount" class="editable amount-cell ${amountClass}">${amountPrefix}$${record.amount.toFixed(2)}</td>
+                <td data-label="Amount" class="editable amount-cell ${amountClass}">${record.type === 'income' ? '+' : ''}${formatCurrency(record.type === 'income' ? record.amount : -record.amount)}</td>
                 <td data-label="Actions">
                     <button class="btn-icon edit" aria-label="Edit transaction">Edit</button>
                     <button class="btn-icon delete" aria-label="Delete transaction">Del</button>

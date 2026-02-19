@@ -134,7 +134,7 @@ function renderTrendChart(trendData) {
         // HTML Structure for a bar
         const barHtml = `
             <div class="chart-bar-column">
-                <div class="chart-bar-value">$${data.amount.toFixed(0)}</div>
+                <div class="chart-bar-value">${formatCurrency(data.amount)}</div>
                 <div class="chart-bar-track-vertical">
                     <div class="chart-bar-fill-vertical" style="height: ${heightPercent}%;"></div>
                 </div>
@@ -192,7 +192,7 @@ function renderRecentActivity(records) {
                     <span class="title">${record.description}</span>
                     <span class="date">${dateStr}</span>
                 </div>
-                <span class="amount ${amountClass}">${amountPrefix}$${record.amount.toFixed(2)}</span>
+                <span class="amount ${amountClass}">${isIncome ? '+' : ''}${formatCurrency(isIncome ? record.amount : -record.amount)}</span>
             </li>
         `;
 
@@ -205,6 +205,4 @@ function renderRecentActivity(records) {
  * @param {number} amount 
  * @returns {string}
  */
-function formatCurrency(amount) {
-    return (amount < 0 ? '-' : '') + '$' + Math.abs(amount).toFixed(2);
-}
+

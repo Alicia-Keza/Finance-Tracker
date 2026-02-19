@@ -10,6 +10,75 @@ const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
 
 // Storage Key
 const STORAGE_KEY = 'financeRecords';
+const SETTINGS_KEY = 'financeSettings';
+
+// Default Settings
+const DEFAULT_SETTINGS = {
+    theme: 'dark', // 'dark' or 'light'
+    currency: 'USD',
+    budgetCap: 1500
+};
+
+// Currency Rates (Approximate, Base USD)
+const CURRENCIES = {
+    'USD': { symbol: '$', code: 'USD', rate: 1 },
+    'EUR': { symbol: '€', code: 'EUR', rate: 0.92 },
+    'GBP': { symbol: '£', code: 'GBP', rate: 0.79 },
+    'RWF': { symbol: 'FRW', code: 'RWF', rate: 1350 },
+    'CAD': { symbol: 'C$', code: 'CAD', rate: 1.35 },
+    'JPY': { symbol: '¥', code: 'JPY', rate: 150 }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+});
+
+/**
+ * Initialize Theme from Settings
+ */
+function initTheme() {
+    const settings = loadSettings();
+    const theme = settings.theme || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+/**
+ * Load Settings from LocalStorage
+ * @returns {Object}
+ */
+function loadSettings() {
+    const stored = localStorage.getItem(SETTINGS_KEY);
+    return stored ? { ...DEFAULT_SETTINGS, ...JSON.parse(stored) } : DEFAULT_SETTINGS;
+}
+
+/**
+ * Save Settings to LocalStorage
+ * @param {Object} settings 
+ */
+function saveSettings(settings) {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+}
+
+/**
+ * Format Currency based on Settings
+ * @param {number} amount 
+ * @returns {string}
+ */
+function formatCurrency(amount) {
+    const settings = loadSettings();
+    const currencyCode = settings.currency || 'USD';
+    const currency = CURRENCIES[currencyCode] || CURRENCIES['USD'];
+
+    // Convert Amount
+    const convertedAmount = amount * currency.rate;
+
+    // Formatting logic:
+    // If JPY or RWF, usually no decimals
+    const isZeroDecimal = currencyCode === 'JPY' || currencyCode === 'RWF';
+    const val = Math.abs(convertedAmount).toFixed(isZeroDecimal ? 0 : 2);
+
+    return (convertedAmount < 0 ? '-' : '') + currency.symbol + val;
+}
 
 /**
  * Load records from LocalStorage
