@@ -1,15 +1,16 @@
-// Regex Validation Constants
-const descriptionRegex = /^(?!\d+$)[A-Za-z0-9 .,!?-]+$/;
+const descriptionRegex = /^(?=.*[A-Za-z])[A-Za-z0-9 .,!?-]+$/;
 const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
 const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+const currencyRegex = /^\S(?:.*\S)?$/;
+const duplicateWordRegex = /\b(\w+)\s+\1\b/i;
 
-// Storage Key
+// Storage Keys
 const STORAGE_KEY = 'financeRecords';
 const SETTINGS_KEY = 'financeSettings';
 
 // Default Settings
 const DEFAULT_SETTINGS = {
-    theme: 'dark', 
+    theme: 'dark',
     currency: 'USD',
     budgetCap: 5000
 };
@@ -26,7 +27,33 @@ const CURRENCIES = {
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initMobileMenu();
 });
+
+/**
+ * Initialize Mobile Navigation Menu
+ */
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+}
 
 /**
  * Initialize Theme from Settings

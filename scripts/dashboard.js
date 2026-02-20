@@ -136,7 +136,7 @@ function calculateLast7DaysTrend(records) {
         d.setDate(today.getDate() - i);
         const dateString = d.toISOString().split('T')[0];
 
-       // Filter records for this day and sum expenses
+        // Filter records for this day and sum expenses
         const daySpendings = records
             .filter(r => r.date === dateString && r.type !== 'income')
             .reduce((sum, r) => sum + r.amount, 0);
@@ -239,9 +239,4 @@ function renderRecentActivity(records) {
     });
 }
 
-/**
- * Helper to format currency
- * @param {number} amount 
- * @returns {string}
- */
 
