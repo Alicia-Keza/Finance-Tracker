@@ -122,12 +122,6 @@
         // --- Duplicate Word Tests ---
         // Regex: /\b(\w+)\s+\1\b/i
         const dupGroup = createGroup('Duplicate Word Validator (Advanced)');
-        // Note: verify if test() returns true for duplicates or valid strings.
-        // Usually, validation regex returns TRUE if VALID. 
-        // But duplicateWordRegex usually MATCHES the error.
-        // So `duplicateWordRegex.test("hello hello")` should be true (meaning duplicate found).
-        // If we want "isValid", it should be !test().
-        // For the purpose of testing the REGEX itself, we assert it MATCHES duplicates.
         assert(dupGroup, duplicateWordRegex.test("hello hello"), "Should find duplicate 'hello'", "hello hello");
         assert(dupGroup, duplicateWordRegex.test("Test TEST"), "Should be case-insensitive", "Test TEST");
         assert(dupGroup, !duplicateWordRegex.test("Hello World"), "Should not find duplicates in unique words", "Hello World");

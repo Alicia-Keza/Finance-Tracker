@@ -1,5 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.transaction-form');
+    const typeSelect = document.getElementById('type');
+    const categorySelect = document.getElementById('category');
+
+    // Category Definitions
+    const CATEGORIES = {
+        expense: [
+            { value: 'food', label: 'Food' },
+            { value: 'books', label: 'Books' },
+            { value: 'transport', label: 'Transport' },
+            { value: 'entertainment', label: 'Entertainment' },
+            { value: 'utilities', label: 'Utilities' },
+            { value: 'other', label: 'Other' }
+        ],
+        income: [
+            { value: 'salary', label: 'Salary' },
+            { value: 'gift', label: 'Gift' },
+            { value: 'investment', label: 'Investment' },
+            { value: 'scholarship', label: 'Scholarship' },
+            { value: 'other', label: 'Other Incomes' }
+        ]
+    };
+
+    /**
+     * Update category options based on type
+     * @param {string} type - 'income' or 'expense'
+     */
+    const updateCategoryOptions = (type) => {
+        const options = CATEGORIES[type] || [];
+        categorySelect.innerHTML = '';
+
+        options.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat.value;
+            option.textContent = cat.label;
+            categorySelect.appendChild(option);
+        });
+
+        // Trigger validation reset for category
+        validateField(categorySelect, categoryRegex, categoryMsg, 'category-error');
+    };
 
     // Real-time Validation Function
     const validateField = (input, regex, errorMsg, errorId) => {
@@ -37,6 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const amountMsg = "Invalid Amount (must be greater than 0).";
     const categoryMsg = "Invalid Category format.";
     const dateMsg = "Date is required.";
+
+    // Initial population
+    updateCategoryOptions(typeSelect.value);
+
+    // Type change listener
+    typeSelect.addEventListener('change', () => {
+        updateCategoryOptions(typeSelect.value);
+    });
 
     // Description listeners
     descInput.addEventListener('input', () => validateField(descInput, descriptionRegex, descMsg, 'desc-error'));

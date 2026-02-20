@@ -97,17 +97,34 @@ document.addEventListener('DOMContentLoaded', () => {
         descCell.innerHTML = `<input type="text" value="${currentDesc}" class="edit-input desc-input">`;
 
         // Category select
-        catCell.innerHTML = `
-            <select class="edit-input cat-input">
-                <option value="food" ${currentCat === 'Food' ? 'selected' : ''}>Food</option>
-                <option value="books" ${currentCat === 'Books' ? 'selected' : ''}>Books</option>
-                <option value="transport" ${currentCat === 'Transport' ? 'selected' : ''}>Transport</option>
-                <option value="entertainment" ${currentCat === 'Entertainment' ? 'selected' : ''}>Entertainment</option>
-                <option value="fees" ${currentCat === 'Fees' ? 'selected' : ''}>Fees</option>
-                <option value="other" ${currentCat === 'Other' ? 'selected' : ''}>Other</option>
-                <option value="income" ${currentCat === 'Income' ? 'selected' : ''}>Income</option>
-            </select>
-        `;
+        const record = loadRecords().find(r => r.id === row.dataset.id);
+        const type = record ? record.type : 'expense';
+
+        const CATEGORIES = {
+            expense: [
+                { value: 'food', label: 'Food' },
+                { value: 'books', label: 'Books' },
+                { value: 'transport', label: 'Transport' },
+                { value: 'entertainment', label: 'Entertainment' },
+                { value: 'utilities', label: 'Utilities' },
+                { value: 'other', label: 'Other' }
+            ],
+            income: [
+                { value: 'salary', label: 'Salary' },
+                { value: 'gift', label: 'Gift' },
+                { value: 'investment', label: 'Investment' },
+                { value: 'scholarship', label: 'Scholarship' },
+                { value: 'other', label: 'Other Incomes' }
+            ]
+        };
+
+        const options = CATEGORIES[type] || CATEGORIES.expense;
+        let categoryHtml = `<select class="edit-input cat-input">`;
+        options.forEach(cat => {
+            categoryHtml += `<option value="${cat.value}" ${currentCat.toLowerCase() === cat.label.toLowerCase() || currentCat.toLowerCase() === cat.value ? 'selected' : ''}>${cat.label}</option>`;
+        });
+        categoryHtml += `</select>`;
+        catCell.innerHTML = categoryHtml;
 
         // Amount input
         amountCell.innerHTML = `<input type="number" value="${currentAmountRaw}" step="0.01" class="edit-input amount-input">`;

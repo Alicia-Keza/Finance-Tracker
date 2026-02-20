@@ -45,13 +45,21 @@
                     <div class="filters">
                         <select id="category-filter" aria-label="Filter by category">
                             <option value="all">All Categories</option>
-                            <option value="food">Food</option>
-                            <option value="books">Books</option>
-                            <option value="transport">Transport</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="fees">Fees</option>
-                            <option value="other">Other</option>
-                            <option value="income">Income</option>
+                            <optgroup label="Expenses">
+                                <option value="food">Food</option>
+                                <option value="books">Books</option>
+                                <option value="transport">Transport</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="other">Other</option>
+                            </optgroup>
+                            <optgroup label="Income">
+                                <option value="salary">Salary</option>
+                                <option value="gift">Gift</option>
+                                <option value="investment">Investment</option>
+                                <option value="scholarship">Scholarship</option>
+                                <option value="other">Other Incomes</option>
+                            </optgroup>
                         </select>
                         <select id="sort-select" aria-label="Sort transactions">
                             <option value="date-desc">Date (Newest)</option>
