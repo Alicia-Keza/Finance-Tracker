@@ -1,0 +1,98 @@
+[
+    {
+        "id": "_seed001",
+        "date": "2024-02-29",
+        "description": " Snacks",
+        "category": "food",
+        "amount": 125.50,
+        "type": "expense"
+    },
+    {
+        "id": "_seed002",
+        "date": "2024-01-01",
+        "description": "Bonus",
+        "category": "salary",
+        "amount": 5000.00,
+        "type": "income"
+    },
+    {
+        "id": "_seed003",
+        "date": "2024-12-31",
+        "description": "New Year's Eve Dinner ",
+        "category": "entertainment",
+        "amount": 450.75,
+        "type": "expense"
+    },
+    {
+        "id": "_seed004",
+        "date": "2024-06-15",
+        "description": "Venture Capital Investment Seed Round Funding (Series A-1)",
+        "category": "investment",
+        "amount": 1000000.00,
+        "type": "income"
+    },
+    {
+        "id": "_seed005",
+        "date": "2024-07-20",
+        "description": "Single Coffee Bean Purchase (Micro-transaction test)",
+        "category": "food",
+        "amount": 0.01,
+        "type": "expense"
+    },
+    {
+        "id": "_seed006",
+        "date": "2024-03-15",
+        "description": "bus fare",
+        "category": "transport",
+        "amount": 85.00,
+        "type": "expense"
+    },
+    {
+        "id": "_seed007",
+        "date": "2024-08-05",
+        "description": "Birthday Gift from mom",
+        "category": "gift",
+        "amount": 50.00,
+        "type": "income"
+    },
+    {
+        "id": "_seed008",
+        "date": "2024-09-10",
+        "description": "Academic Excellence Scholarship ",
+        "category": "scholarship",
+        "amount": 1500.00,
+        "type": "income"
+    },
+    {
+        "id": "_seed009",
+        "date": "2024-10-31",
+        "description": "Halloween Costume & Decorations",
+        "category": "other",
+        "amount": 65.25,
+        "type": "expense"
+    },
+    {
+        "id": "_seed010",
+        "date": "2025-02-20",
+        "description": "iCloud  Payment",
+        "category": "utilities",
+        "amount": 14.99,
+        "type": "expense"
+    },
+    {
+        "id": "_seed011",
+        "date": "2024-11-11",
+        "description": " 4 computer text books",
+        "category": "books",
+        "amount": 110.11,
+        "type": "expense"
+    },
+    {
+        "id": "_seed012",
+        "date": "2024-05-04",
+        "description": " Merch",
+        "category": "entertainment",
+        "amount": 99.99,
+        "type": "expense"
+    }
+]
