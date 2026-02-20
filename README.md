@@ -27,6 +27,8 @@ Before I started coding, I hand-drew some sketches to plan out the layout and us
 
 ## 🧪 Testing
 If you want to check out the validation logic, just open `tests.html`. It runs a suite of automated tests to ensure everything is working as expected.
+## Live Demo: [Link](https://alicia-keza.github.io/Finance-Tracker/)
+## Youtube link: [link](https://youtu.be/_BkVp6byG2U)
 
 ---
 
